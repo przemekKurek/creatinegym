@@ -1,0 +1,28 @@
+.cart {
+    width: 350px;
+    height: 250px;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    display: flex;
+    flex-direction: column;
+    margin: 40px;
+  }
+  
+  .cart-heading {
+    font-size: 18px;
+    font-weight: bold;
+    border-bottom: 1px solid lightgray;
+    padding: 12px;
+  }
+  
+  .cart-description {
+    display: flex;
+    align-self: center;
+    justify-content: center;
+    padding: 40px;
+  }
+  
+  .cart-button {
+    width: 75px;
+    display: flex;
+    align-self: center;
+  }
