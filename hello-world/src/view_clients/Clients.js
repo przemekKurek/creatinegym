@@ -80,9 +80,13 @@ class Clients extends Component {
     }
 
     return (
+      <div style={{ marginTop: "100px" }} >
+      
         <MaterialTable  icons = {tableIcons} title="Lista Klientów" data={groups} columns={this.columns}
                        options={{ search: false, filtering: true, exportButton: false, paging: true }}
         />
+
+      </div>
     );
   }
 }

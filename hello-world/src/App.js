@@ -3,8 +3,9 @@ import MainPage from './Pages/MainPage';
 import Clients from './view_clients/Clients';
 import Buy from './Buy/Buy';
 import Classes from './Classes/Classes';
-import Cancel from './Cancel/Cancel'
-import Book from './Book/Book'
+import Cancel from './Cancel/Cancel';
+import Book from './Book/Book';
+import Dash from './Layout';
 import './App.css';
 
 

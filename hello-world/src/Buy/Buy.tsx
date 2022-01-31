@@ -1,59 +1,69 @@
 import { createField, createForm } from "mobx-easy-form";
-import { Observer, observer } from "mobx-react";
+import { Observer } from "mobx-react";
+import { TextField, Button, Typography } from "@mui/material";
 import { useMemo } from "react";
+import * as yup from "yup";
 
-export default observer(function Form() {
-  const { form, firstName, lastName, initials, age } = useMemo(() => {
+export default function App() {
+  const { form, firstName, lastName, memType, pohNum } = useMemo(() => {
     const form = createForm({
       onSubmit({ values }) {
-        console.log("Values:", values);
-      },
+        alert("values" + JSON.stringify(values, null, 2));
+      }
     });
 
     const firstName = createField({
       id: "firstName",
       form,
-      initialValue: "",
+      initialValue: ""
     });
 
     const lastName = createField({
       id: "lastName",
       form,
-      initialValue: "",
+      initialValue: ""
     });
 
-    const initials = createField({
-      id: "Memebrship Card Type",
+    const memType = createField({
+      id: "initials",
       form,
-      initialValue: "",
+      initialValue: ""
     });
 
-    const age = createField<string, number>({
+    const pohNum = createField<string, number>({
       id: "age",
       form,
-      initialValue: "",
+      initialValue: ""
     });
 
-    return { form, firstName, lastName, initials, age };
+    return { form, firstName, lastName, memType, pohNum };
   }, []);
 
   return (
-    <div>
-      <h1>User info</h1>
+    <div
+      style={{
+        display: "grid",
+        maxWidth: "600px",
+        gridTemplateColumns: "1fr",
+        gridRowGap: "12px",
+        marginLeft: "650px",
+        marginTop: "300px"
+      }}
+    >
+      <Typography variant="h6">User info</Typography>
 
       <Observer>
         {() => {
           return (
-            <div>
-              <div>First name</div>
-              <input
-                value={firstName.state.value}
-                onChange={(e) => firstName.actions.onChange(e.target.value)}
-                onFocus={() => firstName.actions.onFocus()}
-                onBlur={() => firstName.actions.onBlur()}
-              ></input>
-              <div>{firstName.computed.ifWasEverBlurredThenError}</div>
-            </div>
+            <TextField
+              value={firstName.state.value}
+              onChange={(e) => firstName.actions.onChange(e.target.value)}
+              onFocus={() => firstName.actions.onFocus()}
+              onBlur={() => firstName.actions.onBlur()}
+              label={"First name"}
+              error={!!firstName.computed.ifWasEverBlurredThenError}
+              helperText={firstName.computed.ifWasEverBlurredThenError}
+            ></TextField>
           );
         }}
       </Observer>
@@ -61,16 +71,15 @@ export default observer(function Form() {
       <Observer>
         {() => {
           return (
-            <div>
-              <div>Last name</div>
-              <input
-                value={lastName.state.value}
-                onChange={(e) => lastName.actions.onChange(e.target.value)}
-                onFocus={() => lastName.actions.onFocus()}
-                onBlur={() => lastName.actions.onBlur()}
-              ></input>
-              <div>{lastName.computed.ifWasEverBlurredThenError}</div>
-            </div>
+            <TextField
+              value={lastName.state.value}
+              onChange={(e) => lastName.actions.onChange(e.target.value)}
+              onFocus={() => lastName.actions.onFocus()}
+              onBlur={() => lastName.actions.onBlur()}
+              label={"Last name"}
+              error={!!lastName.computed.ifWasEverBlurredThenError}
+              helperText={lastName.computed.ifWasEverBlurredThenError}
+            ></TextField>
           );
         }}
       </Observer>
@@ -78,16 +87,15 @@ export default observer(function Form() {
       <Observer>
         {() => {
           return (
-            <div>
-              <div>Membership Card Type</div>
-              <input
-                value={initials.state.value}
-                onChange={(e) => initials.actions.onChange(e.target.value)}
-                onFocus={() => initials.actions.onFocus()}
-                onBlur={() => initials.actions.onBlur()}
-              ></input>
-              <div>{initials.computed.ifWasEverBlurredThenError}</div>
-            </div>
+            <TextField
+              value={memType.state.value}
+              onChange={(e) => memType.actions.onChange(e.target.value)}
+              onFocus={() => memType.actions.onFocus()}
+              onBlur={() => memType.actions.onBlur()}
+              label={"Membership Card Type"}
+              error={!!memType.computed.ifWasEverBlurredThenError}
+              helperText={memType.computed.ifWasEverBlurredThenError}
+            ></TextField>
           );
         }}
       </Observer>
@@ -95,16 +103,15 @@ export default observer(function Form() {
       <Observer>
         {() => {
           return (
-            <div>
-              <div>Phone Number</div>
-              <input
-                value={age.state.value}
-                onChange={(e) => age.actions.onChange(e.target.value)}
-                onFocus={() => age.actions.onFocus()}
-                onBlur={() => age.actions.onBlur()}
-              ></input>
-              <div>{age.computed.ifWasEverBlurredThenError}</div>
-            </div>
+            <TextField
+              value={pohNum.state.value}
+              onChange={(e) => pohNum.actions.onChange(e.target.value)}
+              onFocus={() => pohNum.actions.onFocus()}
+              onBlur={() => pohNum.actions.onBlur()}
+              label={"Phone Number"}
+              error={!!pohNum.computed.ifWasEverBlurredThenError}
+              helperText={pohNum.computed.ifWasEverBlurredThenError}
+            ></TextField>
           );
         }}
       </Observer>
@@ -112,15 +119,16 @@ export default observer(function Form() {
       <Observer>
         {() => {
           return (
-            <button
+            <Button
+              variant="outlined"
               onClick={form.actions.submit}
-              disabled={form.computed.isError && form.state.submitCount > 0}
+              disabled={form.computed.isError}
             >
-              SUBMIT ({form.computed.isError ? "invalid" : "valid"})
-            </button>
+              SUBMIT
+            </Button>
           );
         }}
       </Observer>
     </div>
   );
-});
+}
