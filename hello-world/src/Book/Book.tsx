@@ -1,89 +1,80 @@
 import { createField, createForm } from "mobx-easy-form";
-import { Observer, observer } from "mobx-react";
+import { Observer } from "mobx-react";
+import { TextField, Button, Typography } from "@mui/material";
 import { useMemo } from "react";
 
-export default observer(function Form() {
-  const { form, branch, firstName, lastName, initials, age, classes } = useMemo(() => {
+export default function App() {
+  const { form, BranchID, firstName, lastName, pohNum, date, classType } = useMemo(() => {
     const form = createForm({
       onSubmit({ values }) {
-        console.log("Values:", values);
-      },
+        alert("values" + JSON.stringify(values, null, 2));
+      }
     });
 
-    const branch = createField({
-        id: "firstName",
-        form,
-        initialValue: "",
-      });
+    const BranchID = createField({
+      id: "BranchID",
+      form,
+      initialValue: ""
+    });
 
     const firstName = createField({
       id: "firstName",
       form,
-      initialValue: "",
+      initialValue: ""
     });
 
     const lastName = createField({
       id: "lastName",
       form,
-      initialValue: "",
+      initialValue: ''
     });
 
-    const initials = createField({
-      id: "Memebrship Card Type",
+    const pohNum = createField<string, number>({
+      id: "pohNum",
       form,
-      initialValue: "",
+      initialValue: ''
     });
 
-    const age = createField<string, number>({
-      id: "age",
+    const date = createField<string>({
+      id: "date",
       form,
-      initialValue: "",
+      initialValue: ""
     });
 
-    const classes = createField<string, number>({
-        id: "age",
-        form,
-        initialValue: "",
-      });
+    const classType = createField<string>({
+      id: "classType",
+      form,
+      initialValue: ""
+    });
 
-    return { form, branch, firstName, lastName, initials, age, classes };
+    return { form, BranchID, firstName, lastName, pohNum, date, classType };
   }, []);
 
   return (
-    <div>
-      <h1>Booking info</h1>
+    <div
+      style={{
+        display: "grid",
+        maxWidth: "600px",
+        gridTemplateColumns: "1fr",
+        gridRowGap: "12px",
+        marginLeft: "650px",
+        marginTop: "300px"
+      }}
+    >
+      <Typography variant="h6">Booking Information</Typography>
 
       <Observer>
         {() => {
           return (
-            <div>
-              <div>Branch ID</div>
-              <input
-                value={branch.state.value}
-                onChange={(e) => branch.actions.onChange(e.target.value)}
-                onFocus={() => branch.actions.onFocus()}
-                onBlur={() => branch.actions.onBlur()}
-              ></input>
-              <div>{branch.computed.ifWasEverBlurredThenError}</div>
-            </div>
-          );
-        }}
-      </Observer>
-
-
-      <Observer>
-        {() => {
-          return (
-            <div>
-              <div>First name</div>
-              <input
-                value={firstName.state.value}
-                onChange={(e) => firstName.actions.onChange(e.target.value)}
-                onFocus={() => firstName.actions.onFocus()}
-                onBlur={() => firstName.actions.onBlur()}
-              ></input>
-              <div>{firstName.computed.ifWasEverBlurredThenError}</div>
-            </div>
+            <TextField
+              value={BranchID.state.value}
+              onChange={(e) => BranchID.actions.onChange(e.target.value)}
+              onFocus={() => BranchID.actions.onFocus()}
+              onBlur={() => BranchID.actions.onBlur()}
+              label={"Branch ID"}
+              error={!!BranchID.computed.ifWasEverBlurredThenError}
+              helperText={BranchID.computed.ifWasEverBlurredThenError}
+            ></TextField>
           );
         }}
       </Observer>
@@ -91,16 +82,15 @@ export default observer(function Form() {
       <Observer>
         {() => {
           return (
-            <div>
-              <div>Last name</div>
-              <input
-                value={lastName.state.value}
-                onChange={(e) => lastName.actions.onChange(e.target.value)}
-                onFocus={() => lastName.actions.onFocus()}
-                onBlur={() => lastName.actions.onBlur()}
-              ></input>
-              <div>{lastName.computed.ifWasEverBlurredThenError}</div>
-            </div>
+            <TextField
+              value={firstName.state.value}
+              onChange={(e) => firstName.actions.onChange(e.target.value)}
+              onFocus={() => firstName.actions.onFocus()}
+              onBlur={() => firstName.actions.onBlur()}
+              label={"First Name"}
+              error={!!firstName.computed.ifWasEverBlurredThenError}
+              helperText={firstName.computed.ifWasEverBlurredThenError}
+            ></TextField>
           );
         }}
       </Observer>
@@ -108,16 +98,15 @@ export default observer(function Form() {
       <Observer>
         {() => {
           return (
-            <div>
-              <div>Phone Number</div>
-              <input
-                value={initials.state.value}
-                onChange={(e) => initials.actions.onChange(e.target.value)}
-                onFocus={() => initials.actions.onFocus()}
-                onBlur={() => initials.actions.onBlur()}
-              ></input>
-              <div>{initials.computed.ifWasEverBlurredThenError}</div>
-            </div>
+            <TextField
+              value={lastName.state.value}
+              onChange={(e) => lastName.actions.onChange(e.target.value)}
+              onFocus={() => lastName.actions.onFocus()}
+              onBlur={() => lastName.actions.onBlur()}
+              label={"Last Name"}
+              error={!!lastName.computed.ifWasEverBlurredThenError}
+              helperText={lastName.computed.ifWasEverBlurredThenError}
+            ></TextField>
           );
         }}
       </Observer>
@@ -125,16 +114,15 @@ export default observer(function Form() {
       <Observer>
         {() => {
           return (
-            <div>
-              <div>Date</div>
-              <input
-                value={age.state.value}
-                onChange={(e) => age.actions.onChange(e.target.value)}
-                onFocus={() => age.actions.onFocus()}
-                onBlur={() => age.actions.onBlur()}
-              ></input>
-              <div>{age.computed.ifWasEverBlurredThenError}</div>
-            </div>
+            <TextField
+              value={pohNum.state.value}
+              onChange={(e) => pohNum.actions.onChange(e.target.value)}
+              onFocus={() => pohNum.actions.onFocus()}
+              onBlur={() => pohNum.actions.onBlur()}
+              label={"Phone Number"}
+              error={!!pohNum.computed.ifWasEverBlurredThenError}
+              helperText={pohNum.computed.ifWasEverBlurredThenError}
+            ></TextField>
           );
         }}
       </Observer>
@@ -142,16 +130,15 @@ export default observer(function Form() {
       <Observer>
         {() => {
           return (
-            <div>
-              <div>Classes</div>
-              <input
-                value={classes.state.value}
-                onChange={(e) => classes.actions.onChange(e.target.value)}
-                onFocus={() => classes.actions.onFocus()}
-                onBlur={() => classes.actions.onBlur()}
-              ></input>
-              <div>{classes.computed.ifWasEverBlurredThenError}</div>
-            </div>
+            <TextField
+              value={date.state.value}
+              onChange={(e) => date.actions.onChange(e.target.value)}
+              onFocus={() => date.actions.onFocus()}
+              onBlur={() => date.actions.onBlur()}
+              label={"Date"}
+              error={!!date.computed.ifWasEverBlurredThenError}
+              helperText={date.computed.ifWasEverBlurredThenError}
+            ></TextField>
           );
         }}
       </Observer>
@@ -159,15 +146,32 @@ export default observer(function Form() {
       <Observer>
         {() => {
           return (
-            <button
+            <TextField
+              value={classType.state.value}
+              onChange={(e) => classType.actions.onChange(e.target.value)}
+              onFocus={() => classType.actions.onFocus()}
+              onBlur={() => classType.actions.onBlur()}
+              label={"Classes's Type"}
+              error={!!classType.computed.ifWasEverBlurredThenError}
+              helperText={classType.computed.ifWasEverBlurredThenError}
+            ></TextField>
+          );
+        }}
+      </Observer>
+
+      <Observer>
+        {() => {
+          return (
+            <Button
+              variant="outlined"
               onClick={form.actions.submit}
-              disabled={form.computed.isError && form.state.submitCount > 0}
+              disabled={form.computed.isError}
             >
-              SUBMIT ({form.computed.isError ? "invalid" : "valid"})
-            </button>
+              SUBMIT
+            </Button>
           );
         }}
       </Observer>
     </div>
   );
-});
+}

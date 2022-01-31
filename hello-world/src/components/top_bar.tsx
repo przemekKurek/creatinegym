@@ -8,14 +8,12 @@ const TopBar: FC = () => {
   const [dataText, setDataText] = useState(null);
 
   useEffect(() => {
+    setDataText(`Creating Gym`);
   }, []);
 
   return (
     <div className='top-bar-container'>
       <p className='top-bar-text'>{dataText}</p>
-      <Link className='top-bar-button' to='/'>
-        <Button variant='contained'>View</Button>
-      </Link>
     </div>
   );
 };

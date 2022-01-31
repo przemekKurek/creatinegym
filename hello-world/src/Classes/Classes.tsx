@@ -1,65 +1,74 @@
 import { createField, createForm } from "mobx-easy-form";
-import { Observer, observer } from "mobx-react";
+import { Observer } from "mobx-react";
+import { TextField, Button, Typography } from "@mui/material";
 import { useMemo } from "react";
 
-export default observer(function Form() {
-  const { form, firstName, lastName, initials, age, number } = useMemo(() => {
+export default function App() {
+  const { form, EmployeeID, className, startTime, endTime, roomID } = useMemo(() => {
     const form = createForm({
       onSubmit({ values }) {
-        console.log("Values:", values);
-      },
+        alert("values" + JSON.stringify(values, null, 2));
+      }
     });
 
-    const firstName = createField({
-      id: "firstName",
+    const EmployeeID = createField({
+      id: "EmployeeID",
       form,
-      initialValue: "",
+      initialValue: ""
     });
 
-    const lastName = createField({
-      id: "lastName",
+    const className = createField({
+      id: "className",
       form,
-      initialValue: "",
+      initialValue: ""
     });
 
-    const initials = createField({
-      id: "Memebrship Card Type",
+    const startTime = createField<string, number>({
+      id: "startTime",
       form,
-      initialValue: "",
+      initialValue: ''
     });
 
-    const age = createField<string, number>({
-      id: "age",
+    const endTime = createField<string, number>({
+      id: "endTime",
       form,
-      initialValue: "",
+      initialValue: ''
     });
 
-    const number = createField<string, number>({
-        id: "number",
-        form,
-        initialValue: "",
-      });
+    const roomID = createField<string, number>({
+      id: "roomID",
+      form,
+      initialValue: ''
+    });
 
-    return { form, firstName, lastName, initials, age, number };
+    return { form, EmployeeID, className, startTime, endTime, roomID };
   }, []);
 
   return (
-    <div>
-      <h1>New Classes</h1>
+    <div
+      style={{
+        display: "grid",
+        maxWidth: "600px",
+        gridTemplateColumns: "1fr",
+        gridRowGap: "12px",
+        marginLeft: "650px",
+        marginTop: "300px"
+      }}
+    >
+      <Typography variant="h6">Booking Information</Typography>
 
       <Observer>
         {() => {
           return (
-            <div>
-              <div>Employee ID</div>
-              <input
-                value={firstName.state.value}
-                onChange={(e) => firstName.actions.onChange(e.target.value)}
-                onFocus={() => firstName.actions.onFocus()}
-                onBlur={() => firstName.actions.onBlur()}
-              ></input>
-              <div>{firstName.computed.ifWasEverBlurredThenError}</div>
-            </div>
+            <TextField
+              value={EmployeeID.state.value}
+              onChange={(e) => EmployeeID.actions.onChange(e.target.value)}
+              onFocus={() => EmployeeID.actions.onFocus()}
+              onBlur={() => EmployeeID.actions.onBlur()}
+              label={"Employee ID"}
+              error={!!EmployeeID.computed.ifWasEverBlurredThenError}
+              helperText={EmployeeID.computed.ifWasEverBlurredThenError}
+            ></TextField>
           );
         }}
       </Observer>
@@ -67,16 +76,15 @@ export default observer(function Form() {
       <Observer>
         {() => {
           return (
-            <div>
-              <div>Classes Name</div>
-              <input
-                value={lastName.state.value}
-                onChange={(e) => lastName.actions.onChange(e.target.value)}
-                onFocus={() => lastName.actions.onFocus()}
-                onBlur={() => lastName.actions.onBlur()}
-              ></input>
-              <div>{lastName.computed.ifWasEverBlurredThenError}</div>
-            </div>
+            <TextField
+              value={className.state.value}
+              onChange={(e) => className.actions.onChange(e.target.value)}
+              onFocus={() => className.actions.onFocus()}
+              onBlur={() => className.actions.onBlur()}
+              label={"Class name"}
+              error={!!className.computed.ifWasEverBlurredThenError}
+              helperText={className.computed.ifWasEverBlurredThenError}
+            ></TextField>
           );
         }}
       </Observer>
@@ -84,16 +92,15 @@ export default observer(function Form() {
       <Observer>
         {() => {
           return (
-            <div>
-              <div>Start Time</div>
-              <input
-                value={initials.state.value}
-                onChange={(e) => initials.actions.onChange(e.target.value)}
-                onFocus={() => initials.actions.onFocus()}
-                onBlur={() => initials.actions.onBlur()}
-              ></input>
-              <div>{initials.computed.ifWasEverBlurredThenError}</div>
-            </div>
+            <TextField
+              value={startTime.state.value}
+              onChange={(e) => startTime.actions.onChange(e.target.value)}
+              onFocus={() => startTime.actions.onFocus()}
+              onBlur={() => startTime.actions.onBlur()}
+              label={"Start Time"}
+              error={!!startTime.computed.ifWasEverBlurredThenError}
+              helperText={startTime.computed.ifWasEverBlurredThenError}
+            ></TextField>
           );
         }}
       </Observer>
@@ -101,16 +108,15 @@ export default observer(function Form() {
       <Observer>
         {() => {
           return (
-            <div>
-              <div>End Time</div>
-              <input
-                value={age.state.value}
-                onChange={(e) => age.actions.onChange(e.target.value)}
-                onFocus={() => age.actions.onFocus()}
-                onBlur={() => age.actions.onBlur()}
-              ></input>
-              <div>{age.computed.ifWasEverBlurredThenError}</div>
-            </div>
+            <TextField
+              value={endTime.state.value}
+              onChange={(e) => endTime.actions.onChange(e.target.value)}
+              onFocus={() => endTime.actions.onFocus()}
+              onBlur={() => endTime.actions.onBlur()}
+              label={"End Time"}
+              error={!!endTime.computed.ifWasEverBlurredThenError}
+              helperText={endTime.computed.ifWasEverBlurredThenError}
+            ></TextField>
           );
         }}
       </Observer>
@@ -118,16 +124,15 @@ export default observer(function Form() {
       <Observer>
         {() => {
           return (
-            <div>
-              <div>Room ID</div>
-              <input
-                value={number.state.value}
-                onChange={(e) => number.actions.onChange(e.target.value)}
-                onFocus={() => number.actions.onFocus()}
-                onBlur={() => number.actions.onBlur()}
-              ></input>
-              <div>{number.computed.ifWasEverBlurredThenError}</div>
-            </div>
+            <TextField
+              value={roomID.state.value}
+              onChange={(e) => roomID.actions.onChange(e.target.value)}
+              onFocus={() => roomID.actions.onFocus()}
+              onBlur={() => roomID.actions.onBlur()}
+              label={"Room ID"}
+              error={!!roomID.computed.ifWasEverBlurredThenError}
+              helperText={roomID.computed.ifWasEverBlurredThenError}
+            ></TextField>
           );
         }}
       </Observer>
@@ -135,15 +140,16 @@ export default observer(function Form() {
       <Observer>
         {() => {
           return (
-            <button
+            <Button
+              variant="outlined"
               onClick={form.actions.submit}
-              disabled={form.computed.isError && form.state.submitCount > 0}
+              disabled={form.computed.isError}
             >
-              SUBMIT ({form.computed.isError ? "invalid" : "valid"})
-            </button>
+              SUBMIT
+            </Button>
           );
         }}
       </Observer>
     </div>
   );
-});
+}
