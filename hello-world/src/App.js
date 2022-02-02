@@ -12,6 +12,7 @@ import './App.css';
 function App() {
   return (
     <Router>
+    <Dash/>
     <Routes>
       <Route path="/" element={<MainPage />} />
       <Route path="/clients" element={<Clients />} />
