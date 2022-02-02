@@ -1,6 +1,4 @@
-import { Button } from '@mui/material';
 import React, { FC, useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
 
 import './top_bar.css';
 
@@ -8,7 +6,7 @@ const TopBar: FC = () => {
   const [dataText, setDataText] = useState(null);
 
   useEffect(() => {
-    setDataText(`Creating Gym`);
+    setDataText(`        Creating Gym`);
   }, []);
 
   return (

@@ -2,6 +2,7 @@ import { createField, createForm } from "mobx-easy-form";
 import { Observer } from "mobx-react";
 import { TextField, Button, Typography } from "@mui/material";
 import { useMemo } from "react";
+import './Book.css';
 
 export default function App() {
   const { form, BranchID, firstName, lastName, pohNum, date, classType } = useMemo(() => {
@@ -51,16 +52,7 @@ export default function App() {
   }, []);
 
   return (
-    <div
-      style={{
-        display: "grid",
-        maxWidth: "600px",
-        gridTemplateColumns: "1fr",
-        gridRowGap: "12px",
-        marginLeft: "650px",
-        marginTop: "300px"
-      }}
-    >
+      <div className = 'book-form'>
       <Typography variant="h6">Booking Information</Typography>
 
       <Observer>
@@ -172,6 +164,6 @@ export default function App() {
           );
         }}
       </Observer>
-    </div>
+      </div>
   );
 }

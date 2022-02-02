@@ -3,6 +3,7 @@ import Cart from '../components/cart';
 import { cartData, carts } from './constants';
 import './MainPage.css';
 
+
 const MainPage = (): JSX.Element => {
   return (
     <div className='carts-container'>

@@ -2,7 +2,7 @@ import { createField, createForm } from "mobx-easy-form";
 import { Observer } from "mobx-react";
 import { TextField, Button, Typography } from "@mui/material";
 import { useMemo } from "react";
-import * as yup from "yup";
+import './Buy.css';
 
 export default function App() {
   const { form, firstName, lastName, memType, pohNum } = useMemo(() => {
@@ -40,16 +40,7 @@ export default function App() {
   }, []);
 
   return (
-    <div
-      style={{
-        display: "grid",
-        maxWidth: "600px",
-        gridTemplateColumns: "1fr",
-        gridRowGap: "12px",
-        marginLeft: "650px",
-        marginTop: "300px"
-      }}
-    >
+    <div className = 'buy-form'>
       <Typography variant="h6">User info</Typography>
 
       <Observer>
