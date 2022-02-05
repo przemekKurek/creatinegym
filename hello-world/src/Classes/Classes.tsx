@@ -3,23 +3,29 @@ import { Observer } from "mobx-react";
 import { TextField, Button, Typography } from "@mui/material";
 import { useMemo } from "react";
 import './Classes.css';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 export default function App() {
-  const { form, EmployeeID, className, startTime, endTime, roomID } = useMemo(() => {
+  const navigate = useNavigate();
+  const { form, EmployeeID, startTime, endTime, roomID } = useMemo(() => {
     const form = createForm({
-      onSubmit({ values }) {
-        alert("values" + JSON.stringify(values, null, 2));
+      onSubmit({ values }) {        
+        axios.post('/bookClass', {data: {
+          //nwm czy bookClasses może byc uzyty do create classes bo imo oba endpointy będą inne. Book do requesta a create do stworzenia zajęć. Na razie zostawiam co jest.
+          employeeId:  values.EmployeeID,
+          roomId: values.roomID,
+          startTime: values.startTime,
+          endTime: values.endTime
+        }}).then(() => {
+          navigate('/')
+        })
+
       }
     });
 
     const EmployeeID = createField({
       id: "EmployeeID",
-      form,
-      initialValue: ""
-    });
-
-    const className = createField({
-      id: "className",
       form,
       initialValue: ""
     });
@@ -42,7 +48,7 @@ export default function App() {
       initialValue: ''
     });
 
-    return { form, EmployeeID, className, startTime, endTime, roomID };
+    return { form, EmployeeID, startTime, endTime, roomID };
   }, []);
 
   return (
@@ -60,22 +66,6 @@ export default function App() {
               label={"Employee ID"}
               error={!!EmployeeID.computed.ifWasEverBlurredThenError}
               helperText={EmployeeID.computed.ifWasEverBlurredThenError}
-            ></TextField>
-          );
-        }}
-      </Observer>
-
-      <Observer>
-        {() => {
-          return (
-            <TextField
-              value={className.state.value}
-              onChange={(e) => className.actions.onChange(e.target.value)}
-              onFocus={() => className.actions.onFocus()}
-              onBlur={() => className.actions.onBlur()}
-              label={"Class name"}
-              error={!!className.computed.ifWasEverBlurredThenError}
-              helperText={className.computed.ifWasEverBlurredThenError}
             ></TextField>
           );
         }}

@@ -2,13 +2,24 @@ import { createField, createForm } from "mobx-easy-form";
 import { Observer } from "mobx-react";
 import { TextField, Button, Typography } from "@mui/material";
 import { useMemo } from "react";
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 import './Book.css';
 
 export default function App() {
-  const { form, BranchID, firstName, lastName, pohNum, date, classType } = useMemo(() => {
+  const navigate = useNavigate();
+  const { form, BranchID, ClientID, date, classType } = useMemo(() => {
     const form = createForm({
-      onSubmit({ values }) {
-        alert("values" + JSON.stringify(values, null, 2));
+      onSubmit({ values }) { 
+        //to powinien być endpoint do tworzenia samego requesta imo, więc zrobiłem go tak jak tabelka wygląda i dodałem na bazie kolumne description.        
+        axios.post('/bookClass', {data: {
+          customerId:  values.ClientID,
+          requestType: 3,
+          description: "1. Branch Id: " + values.BranchID.toString() + " 2. Clients ID: " + values.ClientID.toString() + " 3. Classes Date: " + values.date.toString() + " 4. Class Type: " + values.classType.toString()
+        }}).then(() => {
+          navigate('/')
+        })
+
       }
     });
 
@@ -18,22 +29,10 @@ export default function App() {
       initialValue: ""
     });
 
-    const firstName = createField({
-      id: "firstName",
+    const ClientID = createField({
+      id: "ClientID",
       form,
       initialValue: ""
-    });
-
-    const lastName = createField({
-      id: "lastName",
-      form,
-      initialValue: ''
-    });
-
-    const pohNum = createField<string, number>({
-      id: "pohNum",
-      form,
-      initialValue: ''
     });
 
     const date = createField<string>({
@@ -48,7 +47,7 @@ export default function App() {
       initialValue: ""
     });
 
-    return { form, BranchID, firstName, lastName, pohNum, date, classType };
+    return { form, BranchID, ClientID, date, classType };
   }, []);
 
   return (
@@ -75,45 +74,13 @@ export default function App() {
         {() => {
           return (
             <TextField
-              value={firstName.state.value}
-              onChange={(e) => firstName.actions.onChange(e.target.value)}
-              onFocus={() => firstName.actions.onFocus()}
-              onBlur={() => firstName.actions.onBlur()}
-              label={"First Name"}
-              error={!!firstName.computed.ifWasEverBlurredThenError}
-              helperText={firstName.computed.ifWasEverBlurredThenError}
-            ></TextField>
-          );
-        }}
-      </Observer>
-
-      <Observer>
-        {() => {
-          return (
-            <TextField
-              value={lastName.state.value}
-              onChange={(e) => lastName.actions.onChange(e.target.value)}
-              onFocus={() => lastName.actions.onFocus()}
-              onBlur={() => lastName.actions.onBlur()}
-              label={"Last Name"}
-              error={!!lastName.computed.ifWasEverBlurredThenError}
-              helperText={lastName.computed.ifWasEverBlurredThenError}
-            ></TextField>
-          );
-        }}
-      </Observer>
-
-      <Observer>
-        {() => {
-          return (
-            <TextField
-              value={pohNum.state.value}
-              onChange={(e) => pohNum.actions.onChange(e.target.value)}
-              onFocus={() => pohNum.actions.onFocus()}
-              onBlur={() => pohNum.actions.onBlur()}
-              label={"Phone Number"}
-              error={!!pohNum.computed.ifWasEverBlurredThenError}
-              helperText={pohNum.computed.ifWasEverBlurredThenError}
+              value={ClientID.state.value}
+              onChange={(e) => ClientID.actions.onChange(e.target.value)}
+              onFocus={() => ClientID.actions.onFocus()}
+              onBlur={() => ClientID.actions.onBlur()}
+              label={"Client ID"}
+              error={!!ClientID.computed.ifWasEverBlurredThenError}
+              helperText={ClientID.computed.ifWasEverBlurredThenError}
             ></TextField>
           );
         }}

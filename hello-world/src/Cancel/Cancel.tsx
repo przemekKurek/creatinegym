@@ -3,23 +3,32 @@ import { Observer } from "mobx-react";
 import { TextField, Button, Typography } from "@mui/material";
 import { useMemo } from "react";
 import './Cancel.css';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 export default function App() {
+  const navigate = useNavigate();
   const { form, ClientID, MembershipID} = useMemo(() => {
     const form = createForm({
-      onSubmit({ values }) {
-        alert("values" + JSON.stringify(values, null, 2));
+      onSubmit({ values }) {        
+        axios.delete('/getOut', {data: {
+          customerId:  values.ClientID,
+          membershipId: values.membershipID
+        }}).then(() => {
+          navigate('/')
+        })
+
       }
     });
 
     const ClientID = createField({
-      id: "Client ID",
+      id: "ClientID",
       form,
       initialValue: ""
     });
 
     const MembershipID = createField({
-      id: "Memebership Card ID",
+      id: "membershipID",
       form,
       initialValue: ""
     });

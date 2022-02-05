@@ -2,41 +2,40 @@ import { createField, createForm } from "mobx-easy-form";
 import { Observer } from "mobx-react";
 import { TextField, Button, Typography } from "@mui/material";
 import { useMemo } from "react";
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 import './Buy.css';
 
 export default function App() {
-  const { form, firstName, lastName, memType, pohNum } = useMemo(() => {
+  const navigate = useNavigate();
+  let today = new Date().toLocaleDateString();
+  const { form, ClientID , memTypeID} = useMemo(() => {
     const form = createForm({
-      onSubmit({ values }) {
-        alert("values" + JSON.stringify(values, null, 2));
+      onSubmit({ values }) {        
+        axios.post('/buyCard', {data: {
+          date: today,
+          customerId:  values.ClientID,
+          membershipTypeId: values.memTypeID,
+        }}).then(() => {
+          navigate('/')
+        })
+
       }
     });
 
-    const firstName = createField({
-      id: "firstName",
+    const ClientID = createField({
+      id: "ClientID",
       form,
       initialValue: ""
     });
 
-    const lastName = createField({
-      id: "lastName",
+    const memTypeID = createField({
+      id: "memTypeID",
       form,
       initialValue: ""
     });
 
-    const memType = createField({
-      id: "initials",
-      form,
-      initialValue: ""
-    });
-
-    const pohNum = createField<string, number>({
-      id: "age",
-      form,
-      initialValue: ""
-    });
-
-    return { form, firstName, lastName, memType, pohNum };
+    return { form, ClientID, memTypeID};
   }, []);
 
   return (
@@ -47,13 +46,13 @@ export default function App() {
         {() => {
           return (
             <TextField
-              value={firstName.state.value}
-              onChange={(e) => firstName.actions.onChange(e.target.value)}
-              onFocus={() => firstName.actions.onFocus()}
-              onBlur={() => firstName.actions.onBlur()}
-              label={"First name"}
-              error={!!firstName.computed.ifWasEverBlurredThenError}
-              helperText={firstName.computed.ifWasEverBlurredThenError}
+              value={ClientID.state.value}
+              onChange={(e) => ClientID.actions.onChange(e.target.value)}
+              onFocus={() => ClientID.actions.onFocus()}
+              onBlur={() => ClientID.actions.onBlur()}
+              label={"Client ID"}
+              error={!!ClientID.computed.ifWasEverBlurredThenError}
+              helperText={ClientID.computed.ifWasEverBlurredThenError}
             ></TextField>
           );
         }}
@@ -63,49 +62,18 @@ export default function App() {
         {() => {
           return (
             <TextField
-              value={lastName.state.value}
-              onChange={(e) => lastName.actions.onChange(e.target.value)}
-              onFocus={() => lastName.actions.onFocus()}
-              onBlur={() => lastName.actions.onBlur()}
-              label={"Last name"}
-              error={!!lastName.computed.ifWasEverBlurredThenError}
-              helperText={lastName.computed.ifWasEverBlurredThenError}
-            ></TextField>
-          );
-        }}
-      </Observer>
-
-      <Observer>
-        {() => {
-          return (
-            <TextField
-              value={memType.state.value}
-              onChange={(e) => memType.actions.onChange(e.target.value)}
-              onFocus={() => memType.actions.onFocus()}
-              onBlur={() => memType.actions.onBlur()}
+              value={memTypeID.state.value}
+              onChange={(e) => memTypeID.actions.onChange(e.target.value)}
+              onFocus={() => memTypeID.actions.onFocus()}
+              onBlur={() => memTypeID.actions.onBlur()}
               label={"Membership Card Type"}
-              error={!!memType.computed.ifWasEverBlurredThenError}
-              helperText={memType.computed.ifWasEverBlurredThenError}
+              error={!!memTypeID.computed.ifWasEverBlurredThenError}
+              helperText={memTypeID.computed.ifWasEverBlurredThenError}
             ></TextField>
           );
         }}
       </Observer>
 
-      <Observer>
-        {() => {
-          return (
-            <TextField
-              value={pohNum.state.value}
-              onChange={(e) => pohNum.actions.onChange(e.target.value)}
-              onFocus={() => pohNum.actions.onFocus()}
-              onBlur={() => pohNum.actions.onBlur()}
-              label={"Phone Number"}
-              error={!!pohNum.computed.ifWasEverBlurredThenError}
-              helperText={pohNum.computed.ifWasEverBlurredThenError}
-            ></TextField>
-          );
-        }}
-      </Observer>
 
       <Observer>
         {() => {
