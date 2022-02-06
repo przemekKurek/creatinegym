@@ -3,6 +3,32 @@
     width: 600px;
     grid-template-columns: 1fr;
     row-gap: 12px;
+    align-items: auto;
+    align-self: auto;
     margin: auto !important;
     margin-top: 200px !important;
+
+
+}
+.cancel-form:focus{
+    outline: none !important;
+
+}
+
+.form-button{
+    padding: 10px;
+    border: 5px, solid, #1976D2 !important;
+    font-weight: 600 !important;
+    border: #1976D2 2px solid !important;
+    font-size: 16px !important;
+    background-color: rgba(25, 118, 210, 0.05) !important;
+
+}
+.form-button:hover{
+
+    background-color: rgba(25, 118, 210, 0.2) !important;
+}
+.number-button{
+    text-align: left;
+    border: 0;
 }

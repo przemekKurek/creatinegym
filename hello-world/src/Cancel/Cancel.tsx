@@ -37,6 +37,7 @@ export default function App() {
   }, []);
 
   return (
+    <div>
     <div className = 'cancel-form'>
       <Typography variant="h6">User info</Typography>
 
@@ -76,6 +77,7 @@ export default function App() {
         {() => {
           return (
             <Button
+              className = "form-button"
               variant="outlined"
               onClick={form.actions.submit}
               disabled={form.computed.isError}
@@ -85,6 +87,12 @@ export default function App() {
           );
         }}
       </Observer>
+     
+    </div>
+    <Button
+      className = "number-button">
+        Fajny przypadek
+      </Button>
     </div>
   );
 }

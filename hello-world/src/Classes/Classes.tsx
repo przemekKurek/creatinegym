@@ -11,13 +11,13 @@ export default function App() {
   const { form, EmployeeID, startTime, endTime, roomID } = useMemo(() => {
     const form = createForm({
       onSubmit({ values }) {        
-        axios.post('/bookClass', {data: {
+        axios.post('/bookClass',{
           //nwm czy bookClasses może byc uzyty do create classes bo imo oba endpointy będą inne. Book do requesta a create do stworzenia zajęć. Na razie zostawiam co jest.
-          employeeId:  values.EmployeeID,
           roomId: values.roomID,
-          startTime: values.startTime,
-          endTime: values.endTime
-        }}).then(() => {
+          employeeId: values.EmployeeID,
+          startHour: values.startTime,
+          endHour: values.endTime
+        }).then(() => {
           navigate('/')
         })
 
@@ -123,6 +123,7 @@ export default function App() {
         {() => {
           return (
             <Button
+              className = "form-button"
               variant="outlined"
               onClick={form.actions.submit}
               disabled={form.computed.isError}

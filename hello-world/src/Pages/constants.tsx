@@ -35,4 +35,9 @@ export interface cartData {
       description: 'Manager Generates Report',
       path: '/report'
     },
+    /*{
+      heading: 'View Clients Requests',
+      description: 'Employee checks requests',
+      path: '/request'
+    }*/
   ];

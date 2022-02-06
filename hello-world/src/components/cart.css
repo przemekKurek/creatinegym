@@ -31,17 +31,17 @@
 }
 
 .cart-button {
-  width: 75px;
+  padding: 10px;
   display: flex;
   align-self: center;
-  font-weight: 700 !important;
+  border: 5px, solid, #1976D2 !important;
+  font-weight: 600 !important;
+  border: #1976D2 2px solid !important;
   color: #1976D2 !important;
-  border: 1px solid #1976D2 !important;
-
-  background-image: radial-gradient(rgba(30, 73, 153, 0.38) 0%,
-    rgba(42, 88, 175, 0.6) 100%);
+  font-size: 16px !important;
+  background-color: rgba(25, 118, 210, 0.2) !important;
 }
 
 .cart-button:hover{
-  opacity: 80% !important;
+  background-color: rgba(25, 118, 210, 0.45) !important;
 }
