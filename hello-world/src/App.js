@@ -5,14 +5,17 @@ import Buy from './Buy/Buy';
 import Classes from './Classes/Classes';
 import Cancel from './Cancel/Cancel';
 import Book from './Book/Book';
-import Dash from './Layout';
+import Header from './component/home';
+import Navbar from './component/Navbar';
+
 import './App.css';
 
 
 function App() {
   return (
     <Router>
-    <Dash/>
+    <Navbar />
+    <Header />
     <Routes>
       <Route path="/" element={<MainPage />} />
       <Route path="/clients" element={<Clients />} />
