@@ -8,15 +8,13 @@ import './Buy.css';
 
 export default function App() {
   const navigate = useNavigate();
-  let today = new Date().toLocaleDateString();
   const { form, ClientID , memTypeID} = useMemo(() => {
     const form = createForm({
       onSubmit({ values }) {        
-        axios.post('/buyCard', {data: {
-          date: today,
-          customerId:  values.ClientID,
-          membershipTypeId: values.memTypeID,
-        }}).then(() => {
+        axios.post('/buyCard',{
+          customerId: values.ClientID,
+          membershipCardTypeId: values.memTypeID,
+        }).then(() => {
           navigate('/')
         })
 
@@ -79,6 +77,7 @@ export default function App() {
         {() => {
           return (
             <Button
+              className = "form-button"
               variant="outlined"
               onClick={form.actions.submit}
               disabled={form.computed.isError}

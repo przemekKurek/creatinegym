@@ -10,13 +10,13 @@ export default function App() {
   const navigate = useNavigate();
   const { form, BranchID, ClientID, date, classType } = useMemo(() => {
     const form = createForm({
-      onSubmit({ values }) { 
-        //to powinien być endpoint do tworzenia samego requesta imo, więc zrobiłem go tak jak tabelka wygląda i dodałem na bazie kolumne description.        
-        axios.post('/bookClass', {data: {
+      onSubmit({ values }) {     
+        axios.post('/makeRequest',{
           customerId:  values.ClientID,
-          requestType: 3,
+          requestTypeId: 3,
           description: "1. Branch Id: " + values.BranchID.toString() + " 2. Clients ID: " + values.ClientID.toString() + " 3. Classes Date: " + values.date.toString() + " 4. Class Type: " + values.classType.toString()
-        }}).then(() => {
+        }).then(() => {
+          
           navigate('/')
         })
 
@@ -122,6 +122,7 @@ export default function App() {
         {() => {
           return (
             <Button
+              className = "form-button"
               variant="outlined"
               onClick={form.actions.submit}
               disabled={form.computed.isError}
