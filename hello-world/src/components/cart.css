@@ -1,28 +1,47 @@
 .cart {
-    width: 350px;
-    height: 250px;
-    box-shadow: rgba(20, 7, 7, 0.2) 0px 2px 8px 0px;
-    display: flex;
-    flex-direction: column;
-    margin: 40px;
-  }
-  
-  .cart-heading {
-    font-size: 18px;
-    font-weight: bold;
-    border-bottom: 1px solid rgb(15, 9, 9);
-    padding: 12px;
-  }
-  
-  .cart-description {
-    display: flex;
-    align-self: center;
-    justify-content: center;
-    padding: 40px;
-  }
-  
-  .cart-button {
-    width: 75px;
-    display: flex;
-    align-self: center;
-  }
+  width: 350px;
+  height: 250px;
+  box-shadow: rgba(20, 7, 7, 0.2) 0px 2px 8px 0px;
+  display: flex;
+  border: 2px solid #1976D2;
+  flex-direction: column;
+  margin: 40px;
+  border-radius: 25px !important;
+  background:whitesmoke
+
+}
+
+.cart-heading {
+  font-size: 28px;
+  font-weight: bold;
+  border-bottom: 2px solid #1976D2;
+  padding: 10px;
+  color: #1976D2 !important;
+  align-self: center;
+  justify-content: center;
+}
+
+.cart-description {
+  display: flex;
+  font-size: 18px;
+  align-self: center;
+  justify-content: center;
+  padding: 40px;
+  color: #1976D2 !important;
+}
+
+.cart-button {
+  width: 75px;
+  display: flex;
+  align-self: center;
+  font-weight: 700 !important;
+  color: #1976D2 !important;
+  border: 1px solid #1976D2 !important;
+
+  background-image: radial-gradient(rgba(30, 73, 153, 0.38) 0%,
+    rgba(42, 88, 175, 0.6) 100%);
+}
+
+.cart-button:hover{
+  opacity: 80% !important;
+}

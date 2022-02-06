@@ -3,6 +3,6 @@
     width: 600px;
     grid-template-columns: 1fr;
     row-gap: 12px;
-    margin-left: 650px;
-    margin-top: 300px;
+    margin: auto !important;
+    margin-top: 200px !important;
 }
